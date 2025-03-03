@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Processing</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            animation: colorchange 3s infinite alternate;
+            color: #ffffff;
+        }
+        @keyframes  colorchange{
+          0%{
+            background-color: rgb(150, 150, 252);
+
+          }
+          50%{
+            background-color: rgb(91, 91, 238);
+          }
+          100%{
+            background-color: rgb(124, 124, 255);
+
+          }
+
+
+        }
+        #form{
+             background-color:lightyellow;
+             width:400px;
+             height:150px;
+              margin-left:400px;
+             color:black;
+             border-radius:15px;
+             padding:25px;
+             
+        }
+        input{
+             font-size:25px;
+        }
+        #button{
+             margin-left:150px;
+             border-radius:10px;
+        }
+        #button:hover{
+             color:white;
+             background-color:red;
+        }
+       #button:action{
+        background-color:green;
+       }
+    </style>
+</head>
+<body>
+    <h1 style="color:blue; text-align:center;background-color:yellow; margin-left:500px; margin-right:500px;">Upload a Video</h1>
+    <form action="/process_video" method="post" enctype="multipart/form-data" id="form">
+        
+        <input type="file" name="video" accept="video/*" required> <br><br><br><br><br>
+        <input type="submit" value="Upload and Process" id="button">
+    </form>
+
+    {% if video_output %}
+    <h2>Processed Video:</h2>
+    <video width="640" height="480" controls>
+        <source src="{{ video_output }}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    {% endif %}
+</body>
+</html>

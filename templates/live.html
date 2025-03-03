@@ -1,0 +1,89 @@
+<!--<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Camera</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        #live_feed {
+            width: 100%;
+            height: auto;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="mt-5">Live Camera</h2>
+        <div id="live_feed"></div>
+    </div>
+    <script>
+        function startLiveFeed() {
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(function(stream) {
+                    var video = document.createElement('video');
+                    video.id = 'videoElement';
+                    video.srcObject = stream;
+                    video.autoplay = true;
+                    document.getElementById('live_feed').appendChild(video);
+                })
+                .catch(function(err) {
+                    console.log("An error occurred: " + err);
+                });
+        }
+        startLiveFeed();
+    </script>
+</body>
+</html>
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Webcam Feed</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            animation: colorchange 3s infinite alternate;
+            color: #ffffff;
+        }
+        @keyframes  colorchange{
+          0%{
+            background-color: rgb(150, 150, 252);
+
+          }
+          50%{
+            background-color: rgb(91, 91, 238);
+          }
+          100%{
+            background-color: rgb(124, 124, 255);
+
+          }
+
+          img{
+            width: 100vw;
+            height: 100vh;
+          }
+
+        }
+    </style>
+</head>
+<body>
+    <!-- Video feed from webcam -->
+    <h1 style="color:red; background-color:yellow; margin-left:400px; margin-right:400px; text-align:center;">Real time Count</h1>
+    <img id="webcam-feed" src="{{ url_for('webcam_feed') }}" alt="Webcam Feed" style="margin-left:10%;">
+    
+
+    <script>
+        // Auto-refresh the webcam feed every second
+        setInterval(function(){
+            document.getElementById('webcam-feed').src = "{{ url_for('webcam_feed') }}";
+        }, 1000);
+    </script>
+</body>
+</html>
